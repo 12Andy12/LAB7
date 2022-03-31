@@ -1,4 +1,5 @@
 using ReactiveUI;
+using System.Reactive;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -6,14 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LAB7.Models;
+using System.IO;
 
 namespace LAB7.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
-        Middle middle =new Middle();
+        Middle middle = new Middle();
 
         public ObservableCollection<Student> Items { get; set; }
+        public List<Student> I { get; set; }
         public MainWindowViewModel()
         {
             Items = new ObservableCollection<Student>(BuildAllStudents());
@@ -22,26 +25,30 @@ namespace LAB7.ViewModels
 
         public void BuildActualMarks()
         {
-            for(int i=0;i<Items.Count;i++)
+            MiddleMath = 0;
+            MiddleVisualPrograming = 0;
+            MiddleOOP = 0;
+            MiddlePhysicalCulture = 0;
+            MiddleMiddleMark = 0;
+            for (int i=0;i<Items.Count;i++)
             {
-                middle.math += Items[i].visualMath;
-                middle.visualPrograming += Items[i].visualPrograming;
-                middle.oop += Items[i].visualOOP;
-                middle.physicalCulture += Items[i].visualPhysicalCulture;
+                MiddleMath += Items[i].visualMath;
+                MiddleVisualPrograming += Items[i].visualPrograming;
+                MiddleOOP += Items[i].visualOOP;
+                MiddlePhysicalCulture += Items[i].visualPhysicalCulture;
                 Items[i].visualMiddleMark = 0;
                 Items[i].visualMiddleMark += Items[i].visualMath;
                 Items[i].visualMiddleMark += Items[i].visualPrograming;
                 Items[i].visualMiddleMark += Items[i].visualOOP;
                 Items[i].visualMiddleMark += Items[i].visualPhysicalCulture;
                 Items[i].visualMiddleMark /= 4;
-                middle.middleMark += Items[i].visualMiddleMark;
- 
+                MiddleMiddleMark += Items[i].visualMiddleMark;
             }
-            middle.math /= Items.Count;
-            middle.visualPrograming /= Items.Count;
-            middle.oop /= Items.Count;
-            middle.physicalCulture /= Items.Count;
-            middle.middleMark /= Items.Count;
+            MiddleMath /= Items.Count;
+            MiddleVisualPrograming /= Items.Count;
+            MiddleOOP /= Items.Count;
+            MiddlePhysicalCulture /= Items.Count;
+            MiddleMiddleMark /= Items.Count;
         }
 
         public double MiddleMath
@@ -49,28 +56,54 @@ namespace LAB7.ViewModels
             get => middle.math; 
             set
             {
-                middle.math = value;
+                this.RaiseAndSetIfChanged(ref middle.math, value);
             }
         }
         public double MiddleVisualPrograming
         {
             get => middle.visualPrograming;
-            set => middle.visualPrograming = value; 
+            set
+            {
+                this.RaiseAndSetIfChanged(ref middle.visualPrograming, value);
+            }
         }
         public double MiddleOOP
         {
             get => middle.oop;
-            set => middle.oop = value;
+            set
+            {
+                this.RaiseAndSetIfChanged(ref middle.oop, value);
+            }
         }
         public double MiddlePhysicalCulture
         {
             get => middle.physicalCulture;
-            set => middle.physicalCulture = value;
+            set
+            {
+                this.RaiseAndSetIfChanged(ref middle.physicalCulture, value);
+            }
         }
         public double MiddleMiddleMark
         {
             get => middle.middleMark;
-            set => middle.middleMark = value;
+            set
+            {
+                this.RaiseAndSetIfChanged(ref middle.middleMark, value);
+            }
+        }
+
+        public void SaveFile(string path)
+        {
+            ProcessingFile.WriteFile(path, Items);
+        }
+
+        public void OpenFile(string path)
+        {
+            I = ProcessingFile.ReadFile(path);
+            for(int i = 0; i < Items.Count; i++)
+                Items[i] = I[i];
+
+            BuildActualMarks();
         }
         private Student[] BuildAllStudents()
         {

@@ -12,16 +12,40 @@ namespace LAB7.Views
 		{
 			InitializeComponent();
 
-            //this.FindControl<DataGrid>("MyDataGrid").SelectionChanged += delegate
-            //{
-            //    var context = this.DataContext as MainWindowViewModel;
-            //    context.BuildActualMarks();
-            //};
-            //this.FindControl<DataGrid>("MyDataGrid").BeginningEdit += delegate
-            //{
-            //    var context = this.DataContext as MainWindowViewModel;
-            //    context.BuildActualMarks();
-            //};
+            this.FindControl<MenuItem>("Open").Click += async delegate
+            {
+                var taskPath = new OpenFileDialog()
+                {
+                    Title = "Open File",
+                    Filters = null
+                }.ShowAsync((Window)this.VisualRoot);
+
+                string[]? filePath = await taskPath;
+
+                if (filePath != null)
+                {
+                    var context = this.DataContext as MainWindowViewModel;
+                    context.OpenFile(string.Join(@"\", filePath));
+                }
+            };
+
+            this.FindControl<MenuItem>("Save").Click += async delegate
+            {
+                var taskPath = new OpenFileDialog()
+                {
+                    Title = "Search File",
+                    Filters = null
+                }.ShowAsync((Window)this.VisualRoot);
+
+                string[]? filePath = await taskPath;
+
+                if (filePath != null)
+                {
+                    var context = this.DataContext as MainWindowViewModel;
+                    context.SaveFile(string.Join(@"\", filePath));
+                }
+            };
+
             this.FindControl<DataGrid>("MyDataGrid").CellEditEnded += delegate
             {
                 var context = this.DataContext as MainWindowViewModel;

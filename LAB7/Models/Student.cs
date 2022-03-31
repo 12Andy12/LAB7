@@ -26,10 +26,10 @@ namespace LAB7.Models
             }
         }
 
-        public int visualMath { get; private set; }
-        public int visualPrograming { get; private set; }
-        public int visualOOP { get; private set; }
-        public int visualPhysicalCulture { get; private set; }
+        public int visualMath { get; set; }
+        public int visualPrograming { get; set; }
+        public int visualOOP { get; set; }
+        public int visualPhysicalCulture { get; set; }
         
         public string visualName { get; set; }
 

@@ -15,8 +15,8 @@
     <DockPanel Grid.Column="0" Grid.Row="0">
     <Menu DockPanel.Dock="Top" VerticalAlignment="Top">
       <MenuItem Header="File">
-        <MenuItem Header="Open..."/>
-        <MenuItem Header="Save..."/>
+        <MenuItem Name="Open" Header="Open..."/>
+        <MenuItem Name="Save" Header="Save..."/>
         <MenuItem Header="Exit"/>
       </MenuItem>
       <MenuItem Header="About"/>
@@ -35,7 +35,7 @@
       </DataGrid.Columns>
     </DataGrid>
     <Grid ShowGridLines="False"  ColumnDefinitions="*, *, *, *, *, *, 20" RowDefinitions="*" Grid.Column="0" Grid.Row="2">
-      <TextBox Grid.Column="0" Text="Средний балл в группе"/>
+      <TextBox Grid.Column="0" Text="Ср. по предмету"/>
       <TextBox Grid.Column="1" Text="{Binding MiddleMath}"/>
       <TextBox Grid.Column="2" Text="{Binding MiddleVisualPrograming}"/>
       <TextBox Grid.Column="3" Text="{Binding MiddleOOP}"/>
