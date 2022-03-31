@@ -22,17 +22,16 @@ namespace LAB7.Views
             //    var context = this.DataContext as MainWindowViewModel;
             //    context.BuildActualMarks();
             //};
-            this.FindControl<DataGrid>("MyDataGrid").CellPointerPressed += delegate
+            this.FindControl<DataGrid>("MyDataGrid").CellEditEnded += delegate
             {
                 var context = this.DataContext as MainWindowViewModel;
                 context.BuildActualMarks();
             };
-
         }
-		private void CellEdited(object sender, DataGridCellEditEndingEventArgs e)
-		{
-			var context = this.DataContext as MainWindowViewModel;
-			context.BuildActualMarks();
-		}
+		//private void CellEdited(object sender, DataGridCellEditEndingEventArgs e)
+		//{
+		//	var context = this.DataContext as MainWindowViewModel;
+		//	context.BuildActualMarks();
+		//}
 	}
 }

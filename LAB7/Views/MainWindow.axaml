@@ -25,7 +25,7 @@
     
     <DataGrid Grid.Column="0" Grid.Row="1" Name="MyDataGrid" Items="{Binding Items}" AutoGenerateColumns="False">
       <DataGrid.Columns>
-        <DataGridTextColumn Width="*" Header="Name" Binding="{Binding visualName}" />
+        <DataGridTextColumn Width="*" Header="Name" Binding="{Binding visualName}"/>
         <DataGridTextColumn Width="*" Header="Math" Binding="{Binding visualMath}"/>
         <DataGridTextColumn Width="*" Header="Visual Programing" Binding="{Binding visualPrograming}"/>
         <DataGridTextColumn Width="*" Header="OOP" Binding="{Binding visualOOP}"/>
@@ -34,7 +34,7 @@
         <DataGridCheckBoxColumn Width="20"></DataGridCheckBoxColumn>
       </DataGrid.Columns>
     </DataGrid>
-    <Grid ShowGridLines="False" ColumnDefinitions="*, *, *, *, *, *, 20" RowDefinitions="*" Grid.Column="0" Grid.Row="2">
+    <Grid ShowGridLines="False"  ColumnDefinitions="*, *, *, *, *, *, 20" RowDefinitions="*" Grid.Column="0" Grid.Row="2">
       <TextBox Grid.Column="0" Text="Средний балл в группе"/>
       <TextBox Grid.Column="1" Text="{Binding MiddleMath}"/>
       <TextBox Grid.Column="2" Text="{Binding MiddleVisualPrograming}"/>

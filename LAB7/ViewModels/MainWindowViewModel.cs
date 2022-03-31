@@ -11,11 +11,7 @@ namespace LAB7.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
-        public double middleMath = 0;
-        public double middleVisualPrograming = 0;
-        public double middleOOP = 0;
-        public double middlePhysicalCulture = 0;
-        public double middleMiddleMark = 0;
+        Middle middle =new Middle();
 
         public ObservableCollection<Student> Items { get; set; }
         public MainWindowViewModel()
@@ -28,45 +24,53 @@ namespace LAB7.ViewModels
         {
             for(int i=0;i<Items.Count;i++)
             {
-                middleMath += Items[i].visualMath;
-                middleVisualPrograming += Items[i].visualPrograming;
-                middleOOP += Items[i].visualOOP;
-                middlePhysicalCulture += Items[i].visualPhysicalCulture;
+                middle.math += Items[i].visualMath;
+                middle.visualPrograming += Items[i].visualPrograming;
+                middle.oop += Items[i].visualOOP;
+                middle.physicalCulture += Items[i].visualPhysicalCulture;
                 Items[i].visualMiddleMark = 0;
                 Items[i].visualMiddleMark += Items[i].visualMath;
                 Items[i].visualMiddleMark += Items[i].visualPrograming;
                 Items[i].visualMiddleMark += Items[i].visualOOP;
                 Items[i].visualMiddleMark += Items[i].visualPhysicalCulture;
                 Items[i].visualMiddleMark /= 4;
-                middleMiddleMark += Items[i].visualMiddleMark;
+                middle.middleMark += Items[i].visualMiddleMark;
  
             }
-            middleMath /= Items.Count;
-            middleVisualPrograming /= Items.Count;
-            middleOOP /= Items.Count;
-            middlePhysicalCulture /= Items.Count;
-            middleMiddleMark /= Items.Count;
+            middle.math /= Items.Count;
+            middle.visualPrograming /= Items.Count;
+            middle.oop /= Items.Count;
+            middle.physicalCulture /= Items.Count;
+            middle.middleMark /= Items.Count;
         }
 
         public double MiddleMath
         {
-            get => middleMath; 
+            get => middle.math; 
+            set
+            {
+                middle.math = value;
+            }
         }
         public double MiddleVisualPrograming
         {
-            get => middleVisualPrograming;
+            get => middle.visualPrograming;
+            set => middle.visualPrograming = value; 
         }
         public double MiddleOOP
         {
-            get => middleOOP;
+            get => middle.oop;
+            set => middle.oop = value;
         }
         public double MiddlePhysicalCulture
         {
-            get => middlePhysicalCulture;
+            get => middle.physicalCulture;
+            set => middle.physicalCulture = value;
         }
         public double MiddleMiddleMark
         {
-            get => middleMiddleMark;
+            get => middle.middleMark;
+            set => middle.middleMark = value;
         }
         private Student[] BuildAllStudents()
         {
