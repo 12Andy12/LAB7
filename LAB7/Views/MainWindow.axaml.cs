@@ -75,8 +75,8 @@ namespace LAB7.Views
                         context.Items.RemoveAt(i);
                         --i;
                     }
-                        
                 }
+                context.BuildActualMarks();
             };
             this.FindControl<MenuItem>("About").Click += async delegate
             {
