@@ -11,9 +11,9 @@ namespace LAB7.Models
 {
     internal class ProcessingFile
     {
-        public static List<Student> ReadFile(string path)
+        public static ObservableCollection<Student> ReadFile(string path)
         {
-            List<Student> students = new List<Student>();
+            ObservableCollection<Student> students = new ObservableCollection<Student>();
             Student newSrudent; 
             StreamReader file = new StreamReader(path);
 
@@ -75,7 +75,8 @@ namespace LAB7.Models
             for (int i = 0; i < content.Count; ++i)
             {
                 str = content[i].visualName + ";" + content[i].visualMath.ToString() + ";" + content[i].visualPrograming.ToString() + ";" + content[i].visualOOP + ";" + content[i].visualPhysicalCulture.ToString() + ";" + content[i].visualMiddleMark.ToString() + ";";
-                data.Add(str);
+                if(str != "")
+                    data.Add(str);
             }
             File.WriteAllLines(path, data);
         }

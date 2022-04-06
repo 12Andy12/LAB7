@@ -15,7 +15,12 @@ namespace LAB7.Models
         public double oop = 0;
         public double physicalCulture = 0;
         public double middleMark = 0;
-        
+
+        public string mathC = "red";
+        public string visualProgramingC = "red";
+        public string oopC = "red";
+        public string physicalCultureC = "red";
+        public string middleMarkC = "red";
         public Middle()
         {
              math = 0;

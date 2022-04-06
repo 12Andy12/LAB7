@@ -3,6 +3,7 @@
         xmlns:vm="using:LAB7.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:model="using:LAB7.Models"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="LAB7.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
@@ -11,36 +12,57 @@
     <Design.DataContext>
         <vm:MainWindowViewModel/>
     </Design.DataContext>
-  <Grid ColumnDefinitions="*" RowDefinitions="25, *, 50, 50">
+  <Grid ColumnDefinitions="*" RowDefinitions="25, *, 40, 30">
     <DockPanel Grid.Column="0" Grid.Row="0">
     <Menu DockPanel.Dock="Top" VerticalAlignment="Top">
       <MenuItem Header="File">
         <MenuItem Name="Open" Header="Open..."/>
         <MenuItem Name="Save" Header="Save..."/>
-        <MenuItem Header="Exit"/>
+        <MenuItem Name="Exit" Header="Exit"/>
       </MenuItem>
-      <MenuItem Header="About"/>
+      <MenuItem Name="About" Header="About"/>
     </Menu>
   </DockPanel>
     
-    <DataGrid Grid.Column="0" Grid.Row="1" Name="MyDataGrid" Items="{Binding Items}" AutoGenerateColumns="False">
+    <DataGrid Grid.Column="0"
+              Grid.Row="1"
+              Name="MyDataGrid"
+              Items="{Binding Items}"
+              AutoGenerateColumns="False">
+      
       <DataGrid.Columns>
-        <DataGridTextColumn Width="*" Header="Name" Binding="{Binding visualName}"/>
+        <DataGridTemplateColumn Header="Name" Width="*">
+          <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate DataType="model:Student">
+              <TextBox Background="White" Text="{Binding visualName}"/>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
         <DataGridTextColumn Width="*" Header="Math" Binding="{Binding visualMath}"/>
         <DataGridTextColumn Width="*" Header="Visual Programing" Binding="{Binding visualPrograming}"/>
         <DataGridTextColumn Width="*" Header="OOP" Binding="{Binding visualOOP}"/>
         <DataGridTextColumn Width="*" Header="PhysicalCulture" Binding="{Binding visualPhysicalCulture}"/>
-        <DataGridTextColumn Width="*" Header="Mark " Binding="{Binding visualMiddleMark}"/>
-        <DataGridCheckBoxColumn Width="20"></DataGridCheckBoxColumn>
+        <DataGridTemplateColumn Header="Mark" Width="*">
+          <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate DataType="model:Student">
+              <TextBox Focusable="False" Background="{Binding colorMiddleMark}" Text="{Binding visualMiddleMark}"/>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
+        <DataGridCheckBoxColumn Binding="{Binding IsSelected}" Width="50"></DataGridCheckBoxColumn>
       </DataGrid.Columns>
     </DataGrid>
-    <Grid ShowGridLines="False"  ColumnDefinitions="*, *, *, *, *, *, 20" RowDefinitions="*" Grid.Column="0" Grid.Row="2">
-      <TextBox Grid.Column="0" Text="Ср. по предмету"/>
-      <TextBox Grid.Column="1" Text="{Binding MiddleMath}"/>
-      <TextBox Grid.Column="2" Text="{Binding MiddleVisualPrograming}"/>
-      <TextBox Grid.Column="3" Text="{Binding MiddleOOP}"/>
-      <TextBox Grid.Column="4" Text="{Binding MiddlePhysicalCulture}"/>
-      <TextBox Grid.Column="5" Text="{Binding MiddleMiddleMark}"/>
+    <Grid ShowGridLines="False"  ColumnDefinitions="*, *, *, *, *, *, 50" RowDefinitions="*" Grid.Column="0" Grid.Row="2">
+      <TextBox Focusable="False" Grid.Column="0" Text="Ср. по предмету"/>
+      <TextBox Focusable="False" Grid.Column="1" Background="{Binding MiddleMathC}" Text="{Binding MiddleMath}"/>
+      <TextBox Focusable="False" Grid.Column="2" Background="{Binding MiddleVisualProgramingC}" Text="{Binding MiddleVisualPrograming}"/>
+      <TextBox Focusable="False" Grid.Column="3" Background="{Binding MiddleOOPC}" Text="{Binding MiddleOOP}"/>
+      <TextBox Focusable="False" Grid.Column="4" Background="{Binding MiddlePhysicalCultureC}" Text="{Binding MiddlePhysicalCulture}"/>
+      <TextBox Focusable="False" Grid.Column="5" Background="{Binding MiddleMiddleMarkC}" Text="{Binding MiddleMiddleMark}"/>
+    </Grid>
+    <Grid Name="GridButtons" ColumnDefinitions="*, *" RowDefinitions="30" Grid.Column="0" Grid.Row="3">
+      <Button VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Name="AddBtn" Content="Добавить" Grid.Column="0"/>
+      <Button VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Name="DelBtn" Content="Удалить выбранные" Grid.Column="1"/>
     </Grid>
   </Grid>
   
